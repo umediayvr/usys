@@ -24,7 +24,8 @@
 # export UCORE_LOCAL="$HOME/ucore"
 # source $UCORE_ROOT/env/init
 #
-# Add the lines bellow at the end of ~/.bash_profile:
+# Add the lines bellow between ('# Source global definitions' and '# User specific environment and startup programs')
+# inside of ~/.bash_profile:
 # source $UCORE_ROOT/startup/init
 #
 # Detailed:
