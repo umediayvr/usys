@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# executing rv
+unset QT_PLUGIN_PATH;
+
+eval "$UAPPS_ROOT/rv/$UCORE_RV_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/rv" "$@"

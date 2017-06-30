@@ -1,0 +1,50 @@
+#!/bin/bash
+
+
+# This file contains only enviroment variables that don't contain unresolved values,
+# it is mainly used to set variables that contain versions which later on are used
+# by the script "expandedVars" to resolve paths.
+#
+# Base vars can be overridden by user enviroment. Also, it can be overridden in the bash
+# session by simply overriding the value of the variable then calling the alias "ucoreExpandVars"
+# to resolve the variables that include ucore environment variables in their value.
+
+# checking if dev root is set
+if [ -z "$UCORE_ROOT" ]; then
+    echo "UCORE_ROOT IS NOT SET"
+    exit 1
+fi
+
+# core versions (looping through the versions types apps, packages... etc)
+for coreVersionType in $UCORE_ROOT/settings/versions/$UCORE_APP_VERSION_TYPE/* ; do
+    while IFS='=' read -r appName appVersion || [[ -n "$appName" ]];
+    do
+        # translating the format from the versions file followed by:
+        # name=version to enrvironment format name UCORE_$NAME_VERSION=$VERSION
+        export "UCORE_${appName}_VERSION"=$appVersion
+    done < "$coreVersionType"
+done
+
+# local versions
+localVersions="$UCORE_LOCAL/settings/versions/$UCORE_APP_VERSION_TYPE"
+
+if [ -d "$localVersions" ]; then
+  for localVersionType in $localVersions/* ; do
+      while IFS='=' read -r appName appVersion || [[ -n "$appName" ]];
+      do
+          # translating the format from the versions file followed by:
+          # name=version to enrvironment format name UCORE_$NAME_VERSION=$VERSION
+          export "UCORE_${appName}_VERSION"=$appVersion
+      done < "$localVersionType"
+  done
+fi
+
+# executing local overrides
+if ! [ -z "$UCORE_LOCAL" ]; then
+    if [ -f "$UCORE_LOCAL/env/ucoreVars" ]; then
+        source "$UCORE_LOCAL/env/ucoreVars"
+    fi
+fi
+
+# calling expanded vars
+source $UCORE_ROOT/env/expandedVars
