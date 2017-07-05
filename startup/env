@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# nuke license location
-export FOUNDRY_LICENSE_FILE=$UCORE_ROOT/settings/licenses/nuke/nuke.lic
