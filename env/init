@@ -15,20 +15,24 @@
 # ||       |\___________________________/|
 #
 # Short:
-# Add the lines below at the end of ~/.bashrc:
-# export UMEDIA_HOST_TYPE=`echo $HOSTNAME | grep -oE '[a-z]*' | head -n 2 | tail -n 1`
+# 1 - Add the lines below at the end of ~/.bashrc:
 # export UMEDIA_LOCAL_DATA="$HOME/.umedia"
-# export UAPPS_ROOT="/data/upipe/apps"
+# export UAPPS_ROOT="/data/studio/upipe/apps"
 # export UCORE_VERSION="latest"
-# export UCORE_ROOT="/data/upipe/ucore/$UCORE_VERSION"
+# export UCORE_ROOT="/data/studio/upipe/ucore/$UCORE_VERSION"
 # export UCORE_LOCAL="$HOME/ucore"
 # source $UCORE_ROOT/env/init
 #
-# Add the lines bellow between ('# Source global definitions' and '# User specific environment and startup programs')
+# 2 - Add the lines bellow between ('# Source global definitions' and '# User specific environment and startup programs')
 # inside of ~/.bash_profile:
-# source $UCORE_ROOT/startup/init
+# source $UCORE_ROOT/events/login/init
 #
-# Detailed:
+# 3 - Add the lines bellow to /etc/gdm/PostSession/Default:
+# if ! [ -z "$UCORE_ROOT" ]; then
+#   su $USERNAME -c "$UCORE_ROOT/events/logout/init"
+# fi
+#
+# Basic description:
 # The initialization requires at least the environment variable UCORE_ROOT set which should point to where
 # the ucore folder is localized under your system (usually /data/ucore), the name of that is arbitrary, so named it
 # as you wish. Also, It is always a good idea to have that variable permanently set which can be done by
