@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# tells what is the host type, for instance wk=umedia-wk-0003
+export UMEDIA_HOST_TYPE=`echo $HOSTNAME | grep -oE '[a-z]*' | head -n 2 | tail -n 1`
+
+# shotgun python location
+# (this environment variable is also used externally by the hook:
+# <project>/config/toolkit/config/core/hooks/pipeline_configuration_init.py)
+export UMEDIA_SHOTGUN_PYTHON_EXECUTABLE=$UAPPS_ROOT/shotgunDesktop/$UCORE_SHOTGUNDESKTOP_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/Python/bin/python
+
+# nuke license location
+export FOUNDRY_LICENSE_FILE=$UCORE_ROOT/settings/licenses/nuke/nuke.lic
