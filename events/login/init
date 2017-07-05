@@ -8,7 +8,7 @@
 #                        `-._ -  -  - |
 #                           `-------'
 #
-# Triggered during login to set the initial environment (./env) and to run scripts:
+# Triggered during logout to run scripts:
 #
 # Script Types:
 # - onFirstTimeLogin: runs the scripts only the first time by checking if $UMEDIA_LOCAL_DATA
@@ -17,7 +17,7 @@
 # the scripts are is still executed after that)
 #
 # Host type:
-# defined as a child of the script type, it tells in which kind of host it should
+# defined as a child of the script type, it tells what is the which kind of host it should
 # be executed, this is done by reading the env var $UMEDIA_HOST_TYPE. In case a script
 # is meant to be executed in any host then place it under "any" (rather then duplicating it
 # accross the hosts...)
@@ -34,24 +34,24 @@ if [ -z "$UCORE_ROOT" ]; then
 fi
 
 # loading environments
-source "$UCORE_ROOT/startup/env"
+source "$UCORE_ROOT/events/login/env"
 
 # checking if it's a first time login
-startupTypes=""
+loginTypes=""
 if ! [ -z "$UMEDIA_LOCAL_DATA" ]; then
-  startupTypes="onFirstTimeLogin"
+  loginTypes="onFirstTimeLogin"
 
   # making the umedia folder, so next time it's not going to be flagged
   # as first time
   mkdir $UMEDIA_LOCAL_DATA
 fi
-startupTypes="$startupTypes onAnyLogin"
+loginTypes="$loginTypes onAnyLogin"
 
 # running the login scripts
-for startupType in $startupTypes ; do
+for loginType in $loginTypes ; do
 
-  startupAnyScriptPath="$UCORE_ROOT/startup/$startupType/any/$UCORE_OS/$UCORE_OS_VERSION"
-  startupHostTypeScriptPath="$UCORE_ROOT/startup/$startupType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
+  startupAnyScriptPath="$UCORE_ROOT/events/login/$loginType/any/$UCORE_OS/$UCORE_OS_VERSION"
+  startupHostTypeScriptPath="$UCORE_ROOT/events/login/$loginType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
   for startupScriptPath in $startupAnyScriptPath $startupHostTypeScriptPath ; do
 
     for executable in $startupScriptPath/* ; do
