@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # executing deadline monitor
-eval "$UAPPS_ROOT/deadline/$UCORE_DEADLINE_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/deadlinemonitor" "$@"
+exec "$UAPPS_ROOT/deadline/$UCORE_DEADLINE_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/deadlinemonitor" "$@"

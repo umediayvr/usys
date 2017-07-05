@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # executing mocha pro
-eval "$UAPPS_ROOT/mochapro/$UCORE_MOCHAPRO_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/mochapro" "$@"
+exec "$UAPPS_ROOT/mochapro/$UCORE_MOCHAPRO_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/mochapro" "$@"
