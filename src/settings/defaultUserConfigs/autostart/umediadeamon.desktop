@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=umediadeamon
+GenericName=UMedia Deamon
+Comment=Starts the UMedia Deamon
+Exec=sh -c "$UCORE_ROOT/events/umediadeamon"
+Terminal=false
+Type=Application
+X-GNOME-Autostart-enabled=true

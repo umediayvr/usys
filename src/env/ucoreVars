@@ -15,7 +15,7 @@ if [ -z "$UCORE_ROOT" ]; then
     exit 1
 fi
 
-# core versions (looping through the versions types apps, packages... etc)
+# core versions (looping through the versions types apps, libraries... etc)
 for coreVersionType in $UCORE_ROOT/settings/versions/$UCORE_APP_VERSION_TYPE/* ; do
     while IFS='=' read -r appName appVersion || [[ -n "$appName" ]];
     do
@@ -48,3 +48,6 @@ fi
 
 # calling expanded vars
 source $UCORE_ROOT/env/expandedVars
+
+# calling custom envs
+source $UCORE_ROOT/env/custom

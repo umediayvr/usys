@@ -1,0 +1,6 @@
+#!/bin/bash
+
+source "$UCORE_ROOT/util/queryVersion"
+
+# executing shotgun python
+exec "$UCORE_SHOTGUN_PYTHON_EXECUTABLE" "$@"

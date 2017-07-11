@@ -33,9 +33,6 @@ if [ -z "$UCORE_ROOT" ]; then
     exit 1
 fi
 
-# loading environments
-source "$UCORE_ROOT/events/login/env"
-
 # checking if it's a first time login
 loginTypes=""
 if ! [ -z "$UMEDIA_LOCAL_DATA" ]; then

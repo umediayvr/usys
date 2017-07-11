@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# executing shotgun desktop
+unset QT_PLUGIN_PATH;
+
+# making sure to have just one instance of shotgun desktop running at time
+if ! pgrep -x "Shotgun" > /dev/null
+then
+  cd "$UAPPS_ROOT/shotgunDesktop/$UCORE_SHOTGUNDESKTOP_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION"
+  exec "./Shotgun" "$@"
+fi

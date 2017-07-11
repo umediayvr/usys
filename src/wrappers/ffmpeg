@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# executing ffmpeg
+exec "$UAPPS_ROOT/ffmpeg/$UCORE_FFMPEG_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/ffmpeg" "$@"

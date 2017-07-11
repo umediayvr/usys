@@ -14,23 +14,16 @@
 # |\________                       ~~~~~\
 # ||       |\___________________________/|
 #
-# Short:
+# Usage:
 # 1 - Add the lines below at the end of ~/.bashrc:
-# export UMEDIA_LOCAL_DATA="$HOME/.umedia"
-# export UAPPS_ROOT="/data/studio/upipe/apps"
-# export UCORE_VERSION="latest"
-# export UCORE_ROOT="/data/studio/upipe/ucore/$UCORE_VERSION"
-# export UCORE_LOCAL="$HOME/ucore"
-# source $UCORE_ROOT/env/init
+# export UPIPE_ROOT="/data/studio/upipe"
+# export UBASH_VERSION="latest"
+# source $UPIPE_ROOT/ubash/$UBASH_VERSION/env
+# source $UPIPE_ROOT/ubash/$UBASH_VERSION/init
 #
-# 2 - Add the lines bellow between ('# Source global definitions' and '# User specific environment and startup programs')
-# inside of ~/.bash_profile:
-# source $UCORE_ROOT/events/login/init
-#
-# 3 - Add the lines bellow to /etc/gdm/PostSession/Default:
-# if ! [ -z "$UCORE_ROOT" ]; then
-#   su $USERNAME -c "$UCORE_ROOT/events/logout/init"
-# fi
+# 2 - Copy ../settings/defaultUserConfigs/autostart/*.desktop to:
+# mkdir -p ~/.config/autostart
+# cp $UCORE_ROOT/settings/autostart/*.desktop ~/.config/autostart/
 #
 # Basic description:
 # The initialization requires at least the environment variable UCORE_ROOT set which should point to where
