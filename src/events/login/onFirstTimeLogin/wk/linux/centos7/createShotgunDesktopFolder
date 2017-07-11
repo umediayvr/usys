@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# creating shotgun desktop folder
+mkdir $HOME/.shotgun
+
+# adding the umedia host name to the configuration
+echo "{current_host: 'https://umedia.shotgunstudio.com'}" > $HOME/.shotgun/authentication.yml
