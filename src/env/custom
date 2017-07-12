@@ -10,3 +10,6 @@ export UCORE_SHOTGUN_PYTHON_EXECUTABLE=$UAPPS_ROOT/shotgunDesktop/$UCORE_SHOTGUN
 
 # nuke license location
 export FOUNDRY_LICENSE_FILE=$UCORE_ROOT/settings/licenses/nuke/nuke.lic
+
+# mocha pro license server
+export ISL_LICENSE_FILE=27000@umedia-ls01
