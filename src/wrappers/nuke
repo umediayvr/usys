@@ -1,7 +1,20 @@
 #!/bin/bash
 
+source $UCORE_ROOT/util/queryVersion
+
 # executing nuke
 unset QT_PLUGIN_PATH;
 
+# querying nuke major version
+nukeMajorVersion=`majorVersion $UCORE_NUKE_VERSION`
+
+# nuke plugins path
+nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
+
+# adding neatvideo to the nuke's ofx plugin path
+neatVideoPlugin=$nukePluginsPath/neatVideo/$UCORE_NEATVIDEO_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION
+export OFX_PLUGIN_PATH=$neatVideoPlugin:$OFX_PLUGIN_PATH
+
+# launching nuke
 cd "$UAPPS_ROOT/nuke/$UCORE_NUKE_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION"
 exec "./nuke" "$@"
