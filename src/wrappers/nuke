@@ -11,9 +11,17 @@ nukeMajorVersion=`majorVersion $UCORE_NUKE_VERSION`
 # nuke plugins path
 nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
 
-# adding neatvideo to the nuke's ofx plugin path
-neatVideoPlugin=$nukePluginsPath/neatVideo/$UCORE_NEATVIDEO_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION
-export OFX_PLUGIN_PATH=$neatVideoPlugin:$OFX_PLUGIN_PATH
+# ofx plugin names (separated by space)
+ofxPluginNames="neatVideo"
+
+# adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
+for ofxPluginName in $ofxPluginNames ; do
+  ofxPluginVarName="UCORE_${ofxPluginName^^}_VERSION"
+  ofxPluginVarValue="${!ofxPluginVarName}"
+  ofxPluginPathResolved=$nukePluginsPath/$ofxPluginName/$ofxPluginVarValue/bin/$UCORE_OS/$UCORE_OS_VERSION
+
+  export OFX_PLUGIN_PATH=$ofxPluginPathResolved:$OFX_PLUGIN_PATH
+done
 
 # launching nuke
 cd "$UAPPS_ROOT/nuke/$UCORE_NUKE_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION"
