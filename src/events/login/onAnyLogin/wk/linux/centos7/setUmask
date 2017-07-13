@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# setting the default permission for file creation
-umask 0002

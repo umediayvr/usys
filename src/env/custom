@@ -13,3 +13,6 @@ export FOUNDRY_LICENSE_FILE=$UCORE_ROOT/settings/licenses/nuke/nuke.lic
 
 # mocha pro license server
 export ISL_LICENSE_FILE=27000@umedia-ls01
+
+# setting the default permission for file creation
+umask 0002
