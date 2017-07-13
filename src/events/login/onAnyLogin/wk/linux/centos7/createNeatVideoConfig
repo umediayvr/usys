@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# creating neatvideo config folder
+configFolder=$HOME/.config/ABSoft
+
+# only doing it in case the configation does not exist
+if ! [ -z "$configFolder" ]; then
+    mkdir -p $configFolder
+    cp $UCORE_ROOT/settings/defaultUserConfigs/neatVideo/NeatVideo4-OFX.conf $configFolder/
+fi
