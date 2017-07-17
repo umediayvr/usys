@@ -27,6 +27,9 @@
 # scripts that should be only executed in graphical mode, add the extension ".x" to the
 # script file name, for instance: "openGimp.x"
 
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
     echo "UCORE_ROOT IS NOT SET"
@@ -35,7 +38,7 @@ fi
 
 # checking if it's a first time login
 loginTypes=""
-if ! [ -z "$UMEDIA_LOCAL_DATA" ]; then
+if ! [ -d "$UMEDIA_LOCAL_DATA" ]; then
   loginTypes="onFirstTimeLogin"
 
   # making the umedia folder, so next time it's not going to be flagged
@@ -47,8 +50,8 @@ loginTypes="$loginTypes onAnyLogin"
 # running the login scripts
 for loginType in $loginTypes ; do
 
-  startupAnyScriptPath="$UCORE_ROOT/events/login/$loginType/any/$UCORE_OS/$UCORE_OS_VERSION"
-  startupHostTypeScriptPath="$UCORE_ROOT/events/login/$loginType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
+  startupAnyScriptPath="$dir/$loginType/any/$UCORE_OS/$UCORE_OS_VERSION"
+  startupHostTypeScriptPath="$dir/$loginType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
   for startupScriptPath in $startupAnyScriptPath $startupHostTypeScriptPath ; do
 
     for executable in $startupScriptPath/* ; do

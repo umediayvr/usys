@@ -29,14 +29,17 @@ if [ -z "$UCORE_ROOT" ]; then
     exit 1
 fi
 
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # logout types
 logoutTypes="onAnyLogout"
 
 # running the login scripts
 for logoutType in $logoutTypes ; do
 
-  logoutAnyScriptPath="$UCORE_ROOT/events/logout/$logoutType/any/$UCORE_OS/$UCORE_OS_VERSION"
-  logoutHostTypeScriptPath="$UCORE_ROOT/events/logout/$logoutType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
+  logoutAnyScriptPath="$dir/$logoutType/any/$UCORE_OS/$UCORE_OS_VERSION"
+  logoutHostTypeScriptPath="$dir/$logoutType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
 
   for logoutScriptPath in $logoutAnyScriptPath $logoutHostTypeScriptPath ; do
     for executable in $logoutScriptPath/* ; do
