@@ -13,7 +13,6 @@ unset QT_PLUGIN_PATH;
 
 # querying nuke major version
 nukeMajorVersion=`majorVersion $UVER_NUKE_VERSION`
-echo $nukeMajorVersion
 
 # nuke plugins path
 nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
