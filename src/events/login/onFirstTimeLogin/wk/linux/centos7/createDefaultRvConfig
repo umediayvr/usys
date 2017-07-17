@@ -2,9 +2,9 @@
 
 # creating rv config folder
 configFolder=$HOME/.config/TweakSoftware
-if ! [ -z "$configFolder" ]; then
+if ! [ -d "$configFolder" ]; then
     mkdir -p $configFolder
 fi
 
 # copying the initial config file config file
-cp $UCORE_ROOT/settings/defaultUserConfigs/RV/RV.conf $configFolder/RV.conf
+cp $UCORE_ROOT/$UCORE_VERSION/settings/defaultUserConfigs/RV/RV.conf $configFolder/RV.conf
