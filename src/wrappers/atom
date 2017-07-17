@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# atom app location
+atomLocation="$UAPPS_ROOT/atom/$UVER_ATOM_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION"
+
+# atom is extracted from a RPM which is executed through a wrapper
+export PATH="$atomLocation/usr/share/atom":$PATH
+
+# required system libraries to run atom
+export LD_LIBRARY_PATH="$USYSTEMLIBS_ROOT/libXScrnSaver/lib/$UCORE_OS/$UCORE_OS_VERSION":$LD_LIBRARY_PATH
+
+# executing atom
+exec "$atomLocation/usr/bin/atom" "$@"
