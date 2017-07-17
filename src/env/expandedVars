@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+wrappersDir="$( dirname $dir )"
 
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
@@ -10,13 +13,14 @@ fi
 # building ucore paths
 newBasePath=""
 
-# adding user wrappers to the environment
+# adding wrappers to the environment
 if ! [ -z "$UCORE_LOCAL" ]; then
     if [ -d "$UCORE_LOCAL/wrappers" ]; then
         newBasePath+="$UCORE_LOCAL/wrappers:"
     fi
 fi
-newBasePath+="$UCORE_ROOT/wrappers:"
+
+newBasePath+="$wrappersDir/wrappers:"
 addBasePath=true
 
 # checking if UCORE_PATH is already set
