@@ -5,6 +5,9 @@ import json
 
 
 def writeCurrentEnv(installationEnv):
+    """
+    Writes a json file with the current environment
+    """
     with open(installationEnv, 'w') as f:
         jsonData = json.dumps(dict(os.environ), sort_keys=True, indent=4, separators=(',', ': '))
         f.write(jsonData)

@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 #                    n,
 #                  _/ | _
 #                 /'  `'/
@@ -23,7 +22,7 @@
 #
 # 2 - Copy the auto-start scripts for kde/gnome (starts the umedia deamon):
 # mkdir -p ~/.config/autostart
-# cp $UCORE_ROOT/settings/defaultUserConfigs/autostart/*.desktop ~/.config/autostart/
+# cp $UCORE_ROOT/$UCORE_VERSION/settings/defaultUserConfigs/autostart/*.desktop ~/.config/autostart/
 #
 # 3 - Logout and login back again (done!)
 #
@@ -33,25 +32,28 @@
 # as you wish. Also, It is always a good idea to have that variable permanently set which can be done by
 # adding it to the ~/.bashrc, for that you just need to add the
 # line below at the end of that file:
-# export UCORE_ROOT="$HOME/ucore"
+# export UCORE_ROOT="$HOME/upipe/ucore"
 #
 # You can override most of the UCORE_ROOT defaults by placing overrides under $UCORE_LOCAL, for that
 # just the define another variable at the end of that bash file (overrides have to follow the same folder
 # structure and naming convertion found at UCORE_ROOT):
-# export UCORE_LOCAL="$HOME/.ucore"
+# export UCORE_LOCAL="$HOME/upipe/ucore"
 #
 # Another good idea is to get this "init" called everytime a new shell is created, so you don't need bother
 # of doing this manually. If you wanna do this just add another line at the end of that bash file, after the
 # UCORE_ROOT definition:
-# source $UCORE_ROOT/env/init
+# source $UCORE_ROOT/$UCORE_VERSION/init
 #
 # Last but not least evertime you change the ucore variables in your current bash session, you need to
 # recompute the expandedVars (variables that contain ucored vars as part of their value)
 # by calling:
-# source $UCORE_ROOT/env/expandedVars
+# source $UCORE_ROOT/$UCORE_VERSION/env/expandedVars
 #
 # If you see yourself doing that all time, just add an alias for it at the end that bash file:
-# alias ucoreExpandVars="source $UCORE_ROOT/env/expandedVars"
+# alias ucoreExpandVars="source $UCORE_ROOT/$UCORE_VERSION/env/expandedVars"
+
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # detecting the current os
 if [ "$(uname)" == "Darwin" ]; then
@@ -82,13 +84,10 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     export UCORE_OS="windows"
 fi
 
-# defining the kind of application version that will be set by default
-export UCORE_APP_VERSION_TYPE="active"
-
 # executing user overrides
 if ! [ -z "$UCORE_LOCAL_OVERRIDE_ROOT" ]; then
-    if [ -f "$UCORE_LOCAL_OVERRIDE_ROOT/env/init" ]; then
-        source "$UCORE_LOCAL_OVERRIDE_ROOT/env/init"
+    if [ -f "$UCORE_LOCAL_OVERRIDE_ROOT/init" ]; then
+        source "$UCORE_LOCAL_OVERRIDE_ROOT/init"
     fi
 fi
 
@@ -100,7 +99,7 @@ else
     if [ -z "$UCORE_ROOT" ]; then
         echo "UCORE_ROOT IS NOT SET"
     else
-        source $UCORE_ROOT/env/ucoreVars
+        source $dir/env/ucoreVars
     fi
 fi
 

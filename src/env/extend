@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# shotgun python location
+# (currently the location of 'shotgun python' is also used externally under job configuration:
+# <project>/config/toolkit/config/core/interpreter_Linux.cfg)
+export UCORE_SHOTGUN_PYTHON_EXECUTABLE=$UAPPS_ROOT/shotgunDesktop/$UVER_SHOTGUNDESKTOP_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/Python/bin/python
+
+# updating umedia deamon (auto-start script for kde/gnome):
+# \todo: this should be removed in future releases
+if ! [ -d "$HOME/.config/autostart" ]; then
+  mkdir -p ~/.config/autostart
+fi
+cp $UCORE_ROOT/$UCORE_VERSION/settings/defaultUserConfigs/autostart/*.desktop ~/.config/autostart/
