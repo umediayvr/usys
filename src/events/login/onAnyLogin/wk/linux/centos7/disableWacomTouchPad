@@ -4,7 +4,7 @@
 if wacomCommand="$(type -p xsetwacom)"; then
 
   # querying the touch id
-  touchId=`xsetwacom list | grep TOUCH | grep -oE 'id: [0-9]*' | grep -oE '[0-9]*'`;
+  touchId=`xsetwacom list | grep TOUCH | grep -oE 'id: [0-9]*' | grep -oE '[0-9]*'`
 
   # disabling touch
   if ! [ -z "$touchId" ]; then
