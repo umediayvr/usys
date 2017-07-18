@@ -22,7 +22,7 @@ ofxPluginNames="neatVideo"
 
 # adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
 for ofxPluginName in $ofxPluginNames ; do
-  ofxPluginVarName="UCORE_${ofxPluginName^^}_VERSION"
+  ofxPluginVarName="UVER_${ofxPluginName^^}_VERSION"
   ofxPluginVarValue="${!ofxPluginVarName}"
   ofxPluginPathResolved=$nukePluginsPath/$ofxPluginName/$ofxPluginVarValue/bin/$UCORE_OS/$UCORE_OS_VERSION
 
