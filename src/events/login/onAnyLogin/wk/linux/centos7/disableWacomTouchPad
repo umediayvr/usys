@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # making sure xsetwacom is available
-if foobar_loc="$(type -p xsetwacom)"; then
+if wacomCommand="$(type -p xsetwacom)"; then
 
   # querying the touch id
   touchId=`xsetwacom list | grep TOUCH | grep -oE 'id: [0-9]*' | grep -oE '[0-9]*'`;
