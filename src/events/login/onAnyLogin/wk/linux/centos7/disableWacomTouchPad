@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# making sure xsetwacom is available
+if wacomCommand="$(type -p xsetwacom)"; then
+
+  # querying the touch id
+  touchId=`xsetwacom list | grep TOUCH | grep -oE 'id: [0-9]*' | grep -oE '[0-9]*'`
+
+  # disabling touch
+  if ! [ -z "$touchId" ]; then
+    xsetwacom set $touchId touch off
+  fi
+fi
