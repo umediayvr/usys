@@ -17,8 +17,36 @@ nukeMajorVersion=`majorVersion $UVER_NUKE_VERSION`
 # nuke plugins path
 nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
 
-# ofx plugin names (separated by space)
-ofxPluginNames=""
+# default plugin names that always get loaded by default
+loadDefaultOfxPlugins=""
+
+# custom plugin names coming from the environment
+loadCustomOfxPlugins=$UMEDIA_OFX_PLUGINS
+
+# ofx plugin names about to be loaded (separated by space)
+ofxPluginNames="$loadDefaultOfxPlugins $loadCustomOfxPlugins"
+
+# showing a plugin loader interface in case $UMEDIA_SHOW_PLUGIN_LOADER
+# has been defined, this interface allows users to enable/disable plugins that
+# have been specifiec previously where custom plugins are listed as disabled and
+# default plugins are listed enabled by default
+if ! [ -z "$UMEDIA_SHOW_PLUGIN_LOADER" ]; then
+
+  # custom plugins are not loaded by default
+  customOfxPlugins=""
+  for customPluginName in $loadCustomOfxPlugins ; do
+    customOfxPlugins+="FALSE $customPluginName "
+  done;
+
+  # default plugins are loaded by default
+  defaultPlugins=""
+  for defaultPluginName in $loadDefaultOfxPlugins ; do
+    defaultPlugins+="TRUE $defaultPluginName "
+  done;
+
+  # overriding the ofx plugin names that should be loaded (defined by the user in the UI)
+  ofxPluginNames=$(zenity --title "UMedia: Nuke Plugin Loader" --list --text "Available plugins" --checklist  --column "Enable" --column "Plugin Name" $customOfxPlugins $defaultPlugins --separator=" ")
+fi
 
 # adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
 for ofxPluginName in $ofxPluginNames ; do
