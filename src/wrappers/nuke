@@ -7,6 +7,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 rootDir="$( dirname $dir )"
 
 source $rootDir/util/queryVersion
+source $rootDir/util/featureChooser
 
 # executing nuke
 unset QT_PLUGIN_PATH;
@@ -17,8 +18,24 @@ nukeMajorVersion=`majorVersion $UVER_NUKE_VERSION`
 # nuke plugins path
 nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
 
-# ofx plugin names (separated by space)
-ofxPluginNames=""
+# default plugin names that always get loaded by default
+loadDefaultOfxPlugins=""
+
+# custom plugin names coming from the environment
+loadCustomOfxPlugins=$UMEDIA_OFX_PLUGINS
+
+# ofx plugin names about to be loaded (separated by space)
+ofxPluginNames="$loadDefaultOfxPlugins $loadCustomOfxPlugins"
+
+# showing a plugin chooser interface in case $UMEDIA_SHOW_FEATURE_CHOOSER
+# is defined. This shows an interface that allows users to enable/disable plugins that
+# have been specified previously (loadDefaultOfxPlugins and loadCustomOfxPlugins)
+# where custom plugins are listed as disabled and default plugins are listed
+# enabled by default
+if ! [ -z "$UMEDIA_SHOW_FEATURE_CHOOSER" ]; then
+  # overriding the ofx plugin names that should be loaded (defined by the user in the UI)
+  ofxPluginNames=$(featureChooser "$loadCustomOfxPlugins" "$loadDefaultOfxPlugins" "Available Nuke Plugins")
+fi
 
 # adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
 for ofxPluginName in $ofxPluginNames ; do

@@ -16,7 +16,7 @@ function pythonVersion()
   local version=`$pythonExecutable --version 2>&1 >/dev/null`;
 
   # getting only the major and minor version from the semver (2.7)
-  local version=(`echo $version | grep -oE '[0-9]*[0-9]'`)
+  version=(`echo $version | grep -oE '[0-9]*[0-9]'`)
 
   # result
   if [ "$includePatch" = true ] ; then
