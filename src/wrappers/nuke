@@ -18,7 +18,7 @@ nukeMajorVersion=`majorVersion $UVER_NUKE_VERSION`
 nukePluginsPath=$UPLUGINS_ROOT/nuke/$nukeMajorVersion
 
 # ofx plugin names (separated by space)
-ofxPluginNames="neatVideo"
+ofxPluginNames=""
 
 # adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
 for ofxPluginName in $ofxPluginNames ; do
