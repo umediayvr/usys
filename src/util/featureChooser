@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Shows a dialogue listing features as checkboxes
+# Shows a dialogue listing features as checkboxes (usually this function
+# should be driven by the enviroment $UMEDIA_SHOW_FEATURE_CHOOSER)
 #
 # first argument: string containing the disabled features (separated by space)
 # second argument: string containing the enabled features (separated by space)

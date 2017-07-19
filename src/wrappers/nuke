@@ -27,10 +27,11 @@ loadCustomOfxPlugins=$UMEDIA_OFX_PLUGINS
 # ofx plugin names about to be loaded (separated by space)
 ofxPluginNames="$loadDefaultOfxPlugins $loadCustomOfxPlugins"
 
-# showing a plugin loader interface in case $UMEDIA_SHOW_FEATURE_CHOOSER
-# has been defined, this interface allows users to enable/disable plugins that
-# have been specifiec previously where custom plugins are listed as disabled and
-# default plugins are listed enabled by default
+# showing a plugin chooser interface in case $UMEDIA_SHOW_FEATURE_CHOOSER
+# is defined. This shows an interface that allows users to enable/disable plugins that
+# have been specified previously (loadDefaultOfxPlugins and loadCustomOfxPlugins)
+# where custom plugins are listed as disabled and default plugins are listed
+# enabled by default
 if ! [ -z "$UMEDIA_SHOW_FEATURE_CHOOSER" ]; then
   # overriding the ofx plugin names that should be loaded (defined by the user in the UI)
   ofxPluginNames=$(featureChooser "$loadCustomOfxPlugins" "$loadDefaultOfxPlugins" "Available Nuke Plugins")
