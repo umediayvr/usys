@@ -13,18 +13,6 @@
 # |\________                       ~~~~~\
 # ||       |\___________________________/|
 #
-# Usage:
-# 1 - Add the lines below at the end of ~/.bashrc:
-# export UPIPE_ROOT="/data/studio/upipe"
-# export UBASH_VERSION="latest"
-# source $UPIPE_ROOT/ubash/$UBASH_VERSION/env
-# source $UPIPE_ROOT/ubash/$UBASH_VERSION/init
-#
-# 2 - Copy the auto-start scripts for kde/gnome (starts the umedia deamon):
-# mkdir -p ~/.config/autostart
-# cp $UCORE_ROOT/$UCORE_VERSION/settings/defaultUserConfigs/autostart/*.desktop ~/.config/autostart/
-#
-# 3 - Logout and login back again (done!)
 #
 # Basic description:
 # The initialization requires at least the environment variable UCORE_ROOT set which should point to where
