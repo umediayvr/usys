@@ -7,6 +7,7 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 rootDir="$( dirname $dir )"
 
 source $rootDir/util/queryVersion
+source $rootDir/util/featureChooser
 
 # executing nuke
 unset QT_PLUGIN_PATH;
@@ -31,21 +32,8 @@ ofxPluginNames="$loadDefaultOfxPlugins $loadCustomOfxPlugins"
 # have been specifiec previously where custom plugins are listed as disabled and
 # default plugins are listed enabled by default
 if ! [ -z "$UMEDIA_SHOW_PLUGIN_LOADER" ]; then
-
-  # custom plugins are not loaded by default
-  customOfxPlugins=""
-  for customPluginName in $loadCustomOfxPlugins ; do
-    customOfxPlugins+="FALSE $customPluginName "
-  done;
-
-  # default plugins are loaded by default
-  defaultPlugins=""
-  for defaultPluginName in $loadDefaultOfxPlugins ; do
-    defaultPlugins+="TRUE $defaultPluginName "
-  done;
-
   # overriding the ofx plugin names that should be loaded (defined by the user in the UI)
-  ofxPluginNames=$(zenity --title "UMedia: Nuke Plugin Loader" --list --text "Available plugins" --checklist  --column "Enable" --column "Plugin Name" $customOfxPlugins $defaultPlugins --separator=" ")
+  ofxPluginNames=$(featureChooser "$loadCustomOfxPlugins" "$loadDefaultOfxPlugins" "Available Nuke Plugins")
 fi
 
 # adding automatically the list of the ofx plugin names to the OFX_PLUGIN_PATH
