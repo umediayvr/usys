@@ -11,10 +11,10 @@ source $rootDir/util/queryVersion
 pythonExecutable="$UAPPS_ROOT/python/$UVER_UPYTHON_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/python"
 
 # getting current python version
-pythonVersion=$(pythonVersion $pythonExecutable)
+executableVersion=$(pythonVersion $pythonExecutable)
 
 # tank library
-tankLibrary="$ULIBS_ROOT/tank/$UVER_TANK_VERSION/lib/python$pythonVersion"
+tankLibrary="$ULIBS_ROOT/tank/$UVER_TANK_VERSION/lib/python$executableVersion"
 
 # adding libraries to the python path
 export PYTHONPATH=$tankLibrary:$PYTHONPATH
