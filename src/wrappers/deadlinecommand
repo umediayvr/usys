@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# executing deadline command
+exec "$UAPPS_ROOT/deadline/$UVER_DEADLINE_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/deadlinecommand" "$@"
