@@ -33,6 +33,11 @@ ofxPluginNames="$loadDefaultOfxPlugins $loadCustomOfxPlugins"
 # where custom plugins are listed as disabled and default plugins are listed
 # enabled by default
 if ! [ -z "$UMEDIA_SHOW_FEATURE_CHOOSER" ]; then
+
+  # we need to reset the env var otherwise it's going to popup again for the
+  # nested processes (this routine should only happen in the first level of interaction)
+  export UMEDIA_SHOW_FEATURE_CHOOSER=""
+
   # overriding the ofx plugin names that should be loaded (defined by the user in the UI)
   ofxPluginNames=$(featureChooser "$loadCustomOfxPlugins" "$loadDefaultOfxPlugins" "Available Nuke Plugins")
 fi
