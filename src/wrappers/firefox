@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# this is necessary to avoid firefox to crash during the initialization in centos 7
+if [ "$UCORE_OS_VERSION" == "centos7" ]; then
+  export GTK_THEME="/usr/share/themes/Default/gtk-3.0/gtk-keys.css"
+fi
+
+# executing firefox
+exec "$UAPPS_ROOT/firefox/$UVER_FIREFOX_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/firefox" "$@"
