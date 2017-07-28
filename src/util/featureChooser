@@ -31,6 +31,14 @@ function featureChooser()
     enabledFeaturesString+="TRUE $enabledFeature "
   done;
 
-  # showing the modeal dialogue
-  echo $(zenity --title "UMedia: $title" --list --checklist  --column "Enable" --column "Plugin Name" $disabledFeaturesString $enabledFeaturesString --separator=" ")
+  # since we are setting enviroments for zenity, lets run it through a subshell
+  (
+    # this is necessary to avoid an issue in kde that does not allow the checkboxes to be toggled
+    if [ "$UCORE_OS_VERSION" == "centos7" ]; then
+      export GTK_THEME="/usr/share/themes/Default/gtk-3.0/gtk-keys.css"
+    fi
+
+    # showing a dialogue
+    echo $(zenity --title "UMedia: $title" --list --checklist --column "Enable" --column "Plugin Name" $disabledFeaturesString $enabledFeaturesString --separator=" ")
+  )
 }
