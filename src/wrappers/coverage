@@ -1,0 +1,16 @@
+#!/bin/bash
+
+pythonExecutable="$UAPPS_ROOT/python/$UVER_UPYTHON_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/bin/python"
+
+# getting current python version
+executableVersion=$(pythonversion $pythonExecutable)
+
+# coverage root
+coverageRoot="$ULIBS_ROOT/coverage/$UVER_COVERAGE_VERSION"
+coverageLib="$coverageRoot/lib/python$executableVersion/site-packages"
+
+# adding libraries to the python path
+export PYTHONPATH=$coverageLib:$PYTHONPATH
+
+# executing coverage
+exec upython "$coverageRoot/bin/coverage" "$@"
