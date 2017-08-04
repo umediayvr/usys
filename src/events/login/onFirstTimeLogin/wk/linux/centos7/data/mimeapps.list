@@ -1,0 +1,7 @@
+[Default Applications]
+video/quicktime=rv.desktop;
+image/x-exr=rv.desktop;
+
+[Added Associations]
+video/quicktime=rv.desktop;
+image/x-exr=rv.desktop;
