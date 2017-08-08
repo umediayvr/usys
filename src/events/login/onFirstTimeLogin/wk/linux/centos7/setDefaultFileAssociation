@@ -6,8 +6,8 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # mime apps configuration
 mimeappsFilePath="$dir/data/mimeapps.list"
 
-# old stardard for user overrides several applications still read/write to
-# it (kde in centos 7)
+# old standard for user overrides, several applications still read/write to
+# it (kde 4 in centos 7)
 deprecatedConfigFolder=$HOME/.local/share/applications
 if ! [ -d "$deprecatedConfigFolder" ]; then
     mkdir -p $deprecatedConfigFolder
