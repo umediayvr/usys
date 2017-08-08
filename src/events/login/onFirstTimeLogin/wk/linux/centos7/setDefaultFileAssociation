@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# mime apps configuration
+mimeappsFilePath="$dir/data/mimeapps.list"
+
+# old standard for user overrides, several applications still read/write to
+# it (kde 4 in centos 7)
+deprecatedConfigFolder=$HOME/.local/share/applications
+if ! [ -d "$deprecatedConfigFolder" ]; then
+    mkdir -p $deprecatedConfigFolder
+fi
+cp $mimeappsFilePath $deprecatedConfigFolder/
+
+# xdg standard (official way for user overrides)
+configFolder=$HOME/.config
+if ! [ -d "$configFolder" ]; then
+    mkdir -p $configFolder
+fi
+
+cp $mimeappsFilePath $configFolder/
