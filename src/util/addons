@@ -1,0 +1,22 @@
+#!/bin/bash
+
+function loadAddons()
+{
+  # getting current script folder
+  local dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+  # root directory
+  local rootDir="$( dirname $dir )"
+
+  # arguments
+  local appName=$1
+
+  local addonsOutput=`readaddons "$rootDir/addons/$appName.json"`
+
+  'BEGIN {FS="\t"}; $4 == "OPTIONAL_OFF"'
+
+  # seperating addons by category
+  local enabledStatusOff=`echo $addonsOutput | cut -d$'\t' -f4-4`
+
+  echo $addonsOutput;
+}

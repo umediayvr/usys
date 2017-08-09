@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# executing shotgun python
-exec "$UCORE_SHOTGUN_PYTHON_EXECUTABLE" "$@"

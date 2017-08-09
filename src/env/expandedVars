@@ -6,8 +6,8 @@ wrappersDir="$( dirname $dir )"
 
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
-    echo "UCORE_ROOT IS NOT SET"
-    exit 1
+    echo "UCORE_ROOT IS NOT SET" >&2
+    return
 fi
 
 # building ucore paths
@@ -18,9 +18,13 @@ if ! [ -z "$UCORE_LOCAL" ]; then
     if [ -d "$UCORE_LOCAL/wrappers" ]; then
         newBasePath+="$UCORE_LOCAL/wrappers:"
     fi
+
+    if [ -d "$UCORE_LOCAL/commands" ]; then
+        newBasePath+="$UCORE_LOCAL/commands:"
+    fi
 fi
 
-newBasePath+="$wrappersDir/wrappers:"
+newBasePath+="$wrappersDir/commands:$wrappersDir/wrappers:"
 addBasePath=true
 
 # checking if UCORE_PATH is already set
