@@ -81,18 +81,18 @@ fi
 
 # initializing
 if [ -z "$UCORE_OS_VERSION" ]; then
-    echo "COULD NOT RESOLVE UCORE_OS_VERSION!"
+    echo "COULD NOT RESOLVE UCORE_OS_VERSION!" >&2
 
 else
     if [ -z "$UCORE_ROOT" ]; then
-        echo "UCORE_ROOT IS NOT SET"
+        echo "UCORE_ROOT IS NOT SET" >&2
     else
         source $dir/env/ucoreVars
     fi
 fi
 
 if [ -z "$UAPPS_ROOT" ]; then
-    echo "UAPPS_ROOT IS NOT DEFINED!"
+    echo "UAPPS_ROOT IS NOT DEFINED!" >&2
 fi
 
 # executing the input command (if applicable)
