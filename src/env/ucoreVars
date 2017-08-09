@@ -10,8 +10,8 @@
 
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
-    echo "UCORE_ROOT IS NOT SET"
-    exit 1
+    echo "UCORE_ROOT IS NOT SET" >&2
+    return
 fi
 
 # getting current script folder

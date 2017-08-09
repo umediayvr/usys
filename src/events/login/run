@@ -32,44 +32,44 @@ dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
-    echo "UCORE_ROOT IS NOT SET"
-    exit 1
-fi
+    echo "UCORE_ROOT IS NOT SET" >&2
+else
 
-# checking if it's a first time login
-loginTypes=""
-if ! [ -d "$UMEDIA_LOCAL_DATA" ]; then
-  loginTypes="onFirstTimeLogin"
+  # checking if it's a first time login
+  loginTypes=""
+  if ! [ -d "$UMEDIA_LOCAL_DATA" ]; then
+    loginTypes="onFirstTimeLogin"
 
-  # making the umedia folder, so next time it's not going to be flagged
-  # as first time
-  mkdir $UMEDIA_LOCAL_DATA
-fi
-loginTypes="$loginTypes onAnyLogin"
+    # making the umedia folder, so next time it's not going to be flagged
+    # as first time
+    mkdir $UMEDIA_LOCAL_DATA
+  fi
+  loginTypes="$loginTypes onAnyLogin"
 
-# running the login scripts
-for loginType in $loginTypes ; do
+  # running the login scripts
+  for loginType in $loginTypes ; do
 
-  startupAnyScriptPath="$dir/$loginType/any/$UCORE_OS/$UCORE_OS_VERSION"
-  startupHostTypeScriptPath="$dir/$loginType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
-  for startupScriptPath in $startupAnyScriptPath $startupHostTypeScriptPath ; do
+    startupAnyScriptPath="$dir/$loginType/any/$UCORE_OS/$UCORE_OS_VERSION"
+    startupHostTypeScriptPath="$dir/$loginType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
+    for startupScriptPath in $startupAnyScriptPath $startupHostTypeScriptPath ; do
 
-    for executable in $startupScriptPath/* ; do
+      for executable in $startupScriptPath/* ; do
 
-      # making sure it's an executable
-      if [[ -x "$executable" ]]; then
+        # making sure it's an executable
+        if [[ -x "$executable" ]]; then
 
-        # runs only in graphical mode (X11). This is done by checking the extension of the script
-        if [ ${executable: -2} == ".x" ]; then
-          # checking if X is available
-          if xhost >& /dev/null ; then
+          # runs only in graphical mode (X11). This is done by checking the extension of the script
+          if [ ${executable: -2} == ".x" ]; then
+            # checking if X is available
+            if xhost >& /dev/null ; then
+              eval $executable
+            fi
+          # does not care about X availability
+          else
             eval $executable
           fi
-        # does not care about X availability
-        else
-          eval $executable
         fi
-      fi
+      done
     done
   done
-done
+fi
