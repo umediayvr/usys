@@ -10,39 +10,21 @@ if [ -z "$UCORE_ROOT" ]; then
     return
 fi
 
-# building ucore paths
-newBasePath=""
-
-# adding wrappers to the environment
+# adding bin to the path
+ucoreBinPath=""
 if ! [ -z "$UCORE_LOCAL" ]; then
-    if [ -d "$UCORE_LOCAL/wrappers" ]; then
-        newBasePath+="$UCORE_LOCAL/wrappers:"
-    fi
-
-    if [ -d "$UCORE_LOCAL/commands" ]; then
-        newBasePath+="$UCORE_LOCAL/commands:"
+    if [ -d "$UCORE_LOCAL/bin" ]; then
+        ucoreBinPath+="$UCORE_LOCAL/bin:"
     fi
 fi
 
-newBasePath+="$wrappersDir/commands:$wrappersDir/wrappers:"
-addBasePath=true
-
-# checking if UCORE_PATH is already set
-if ! [ -z "$UCORE_PATH" ]; then
-
-    # replacing the value of devPath in the path, so avoiding to prepend it again
-    if [[ $PATH == *"$UCORE_PATH"* ]]; then
-        addBasePath=false
-        export PATH=`echo $PATH | sed "s#$UCORE_PATH#$newBasePath#"`
-    fi
+# avoiding to prepended to the system path for every single bash session by making
+# sure bin is not included to the path yet.
+ucoreBinPath+="$wrappersDir/bin"
+if ! [ "$UCORE_BIN_PATH" == "$ucoreBinPath" ]; then
+    export UCORE_BIN_PATH=$ucoreBinPath
+    export PATH="$UCORE_BIN_PATH:$PATH"
 fi
-
-# adding devPath to the PATH
-if $addBasePath; then
-    export PATH=$newBasePath$PATH
-fi
-
-export UCORE_PATH=$newBasePath
 
 # executing user overrides
 if ! [ -z "$UCORE_LOCAL" ]; then
