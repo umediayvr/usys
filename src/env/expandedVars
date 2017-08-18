@@ -2,7 +2,7 @@
 
 # getting current script folder
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-wrappersDir="$( dirname $dir )"
+rootDir="$( dirname $dir )"
 
 # checking if dev root is set
 if [ -z "$UCORE_ROOT" ]; then
@@ -20,7 +20,7 @@ fi
 
 # avoiding to prepended to the system path for every single bash session by making
 # sure bin is not included to the path yet.
-ucoreBinPath+="$wrappersDir/bin"
+ucoreBinPath+="$rootDir/bin"
 if ! [ "$UCORE_BIN_PATH" == "$ucoreBinPath" ]; then
     export UCORE_BIN_PATH=$ucoreBinPath
     export PATH="$UCORE_BIN_PATH:$PATH"
