@@ -24,19 +24,6 @@ if ! [ -z "$UCORE_LOCAL" ]; then
     fi
 fi
 
-# rez support
-rez="$UAPPS_ROOT/rez/$UVER_REZ_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION"
-if [ -d "$rez" ]; then
-  # adding it to the path
-  export PATH="$rez/bin/rez:$PATH"
-
-  # sourcing auto-completion
-  source "$rez/completion/complete.sh"
-else
-  # should throw an error message in case it was not found
-  echo "Error: Could not find rez version $UVER_REZ_VERSION for the current platform/os ($UCORE_OS/$UCORE_OS_VERSION)!" >&2
-fi
-
 # calling expanded vars
 source $dir/expandedVars
 

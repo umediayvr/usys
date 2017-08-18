@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# executing mocha pro
-exec "$UAPPS_ROOT/mochapro/$UVER_MOCHAPRO_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/mochapro" "$@"

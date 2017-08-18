@@ -1,4 +1,0 @@
-#!/bin/bash
-
-# executing ffmpeg
-exec "$UAPPS_ROOT/ffmpeg/$UVER_FFMPEG_VERSION/bin/$UCORE_OS/$UCORE_OS_VERSION/ffmpeg" "$@"
