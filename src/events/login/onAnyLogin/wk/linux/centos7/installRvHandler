@@ -108,7 +108,7 @@ if ($status == 0) then
 [Desktop Entry]
 Name=RVLink
 Type=Application
-Exec=$rv %U
+Exec=$rv "%U"
 Terminal=false
 Categories=AudioVideo;Viewer;Player;
 MimeType=x-scheme-handler/rvlink;
