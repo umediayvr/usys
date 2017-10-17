@@ -29,3 +29,6 @@ source $dir/expandedVars
 
 # calling custom envs
 source $dir/extend
+
+# calling extra libraries
+source $dir/extraLibs
