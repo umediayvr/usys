@@ -19,7 +19,7 @@ if [ -d "$libsPath" ]; then
 fi
 
 # avoiding to prepended to the system path for every single bash session by making
-# sure bin is not included to the path yet.
+# sure "lib" is not included to the path yet.
 if ! [ "$UCORE_LIB_PATH" == "$ucoreLibPath" ]; then
     export UCORE_LIB_PATH=$ucoreLibPath
 
