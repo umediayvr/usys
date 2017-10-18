@@ -1,0 +1,31 @@
+#!/bin/bash
+
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+rootDir="$(dirname $dir)"
+
+# libraries to be loaded
+libsPath="$rootDir/libs/$UCORE_OS/$UCORE_OS_VERSION"
+
+# collecting extra libs
+ucoreLibPath=""
+if [ -d "$libsPath" ]; then
+  for library in $libsPath/* ; do
+    if [ -z "$ucoreLibPath" ]; then
+      ucoreLibPath="$library/lib"
+    else
+      ucoreLibPath="$library/lib:$ucoreLibPath"
+    fi
+  done
+fi
+
+# avoiding to prepended to the system path for every single bash session by making
+# sure bin is not included to the path yet.
+if ! [ "$UCORE_LIB_PATH" == "$ucoreLibPath" ]; then
+    export UCORE_LIB_PATH=$ucoreLibPath
+
+    if [ -z "$LD_LIBRARY_PATH" ]; then
+      export LD_LIBRARY_PATH="$ucoreLibPath"
+    else
+      export LD_LIBRARY_PATH="$ucoreLibPath:$LD_LIBRARY_PATH"
+    fi
+fi
