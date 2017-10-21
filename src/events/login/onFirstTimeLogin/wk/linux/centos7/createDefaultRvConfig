@@ -7,4 +7,4 @@ if ! [ -d "$configFolder" ]; then
 fi
 
 # copying the initial config file config file
-cp $UCORE_ROOT/$UCORE_VERSION/settings/defaultUserConfigs/RV/RV.conf $configFolder/RV.conf
+cp $( locres ucore/$UCORE_VERSION )/settings/defaultUserConfigs/RV/RV.conf $configFolder/RV.conf

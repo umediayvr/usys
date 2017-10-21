@@ -2,7 +2,7 @@
 Name=umediadeamon
 GenericName=UMedia Deamon
 Comment=Starts the UMedia Deamon
-Exec=sh -c "$UCORE_ROOT/$UCORE_VERSION/events/umediadeamon"
+Exec=sh -c "$( locres ucore/$UCORE_VERSION )/events/umediadeamon"
 Terminal=false
 Type=Application
 X-GNOME-Autostart-enabled=true
