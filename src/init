@@ -53,7 +53,7 @@ if [ -z "$UCORE_OS_VERSION" ]; then
     echo "COULD NOT RESOLVE UCORE_OS_VERSION!" >&2
 
 else
-    source $dir/env/extend
+    source $dir/env
 fi
 
 # executing the input command (if applicable)
