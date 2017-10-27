@@ -13,32 +13,8 @@
 # |\________                       ~~~~~\
 # ||       |\___________________________/|
 #
-#
-# Basic description:
-# The initialization requires at least the environment variable UCORE_ROOT set which should point to where
-# the ucore folder is localized under your system (usually /data/ucore), the name of that is arbitrary, so named it
-# as you wish. Also, It is always a good idea to have that variable permanently set which can be done by
-# adding it to the ~/.bashrc, for that you just need to add the
-# line below at the end of that file:
-# export UCORE_ROOT="$HOME/upipe/ucore"
-#
-# You can override most of the UCORE_ROOT defaults by placing overrides under $UCORE_LOCAL, for that
-# just the define another variable at the end of that bash file (overrides have to follow the same folder
-# structure and naming convertion found at UCORE_ROOT):
-# export UCORE_LOCAL="$HOME/upipe/ucore"
-#
-# Another good idea is to get this "init" called everytime a new shell is created, so you don't need bother
-# of doing this manually. If you wanna do this just add another line at the end of that bash file, after the
-# UCORE_ROOT definition:
-# source $UCORE_ROOT/$UCORE_VERSION/init
-#
-# Last but not least evertime you change the ucore variables in your current bash session, you need to
-# recompute the expandedVars (variables that contain ucored vars as part of their value)
-# by calling:
-# source $UCORE_ROOT/$UCORE_VERSION/env/expandedVars
-#
-# If you see yourself doing that all time, just add an alias for it at the end that bash file:
-# alias ucoreExpandVars="source $UCORE_ROOT/$UCORE_VERSION/env/expandedVars"
+# ucore is responsable for initialization of the infrastructure used
+# by apps that run on top upipe
 
 # getting current script folder
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -72,27 +48,12 @@ elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
     export UCORE_OS="windows"
 fi
 
-# executing user overrides
-if ! [ -z "$UCORE_LOCAL_OVERRIDE_ROOT" ]; then
-    if [ -f "$UCORE_LOCAL_OVERRIDE_ROOT/init" ]; then
-        source "$UCORE_LOCAL_OVERRIDE_ROOT/init"
-    fi
-fi
-
 # initializing
 if [ -z "$UCORE_OS_VERSION" ]; then
     echo "COULD NOT RESOLVE UCORE_OS_VERSION!" >&2
 
 else
-    if [ -z "$UCORE_ROOT" ]; then
-        echo "UCORE_ROOT IS NOT SET" >&2
-    else
-        source $dir/env/ucoreVars
-    fi
-fi
-
-if [ -z "$UAPPS_ROOT" ]; then
-    echo "UAPPS_ROOT IS NOT DEFINED!" >&2
+    source $dir/env/extend
 fi
 
 # executing the input command (if applicable)

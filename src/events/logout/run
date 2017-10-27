@@ -23,30 +23,25 @@
 # Script conventions:
 # make sure the scripts have the shebang (#!) and are set as executable.
 
-# checking if dev root is set
-if [ -z "$UCORE_ROOT" ]; then
-    echo "UCORE_ROOT IS NOT SET" >&2
-else
-  # getting current script folder
-  dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# getting current script folder
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-  # logout types
-  logoutTypes="onAnyLogout"
+# logout types
+logoutTypes="onAnyLogout"
 
-  # running the login scripts
-  for logoutType in $logoutTypes ; do
+# running the login scripts
+for logoutType in $logoutTypes ; do
 
-    logoutAnyScriptPath="$dir/$logoutType/any/$UCORE_OS/$UCORE_OS_VERSION"
-    logoutHostTypeScriptPath="$dir/$logoutType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
+  logoutAnyScriptPath="$dir/$logoutType/any/$UCORE_OS/$UCORE_OS_VERSION"
+  logoutHostTypeScriptPath="$dir/$logoutType/$UMEDIA_HOST_TYPE/$UCORE_OS/$UCORE_OS_VERSION"
 
-    for logoutScriptPath in $logoutAnyScriptPath $logoutHostTypeScriptPath ; do
-      for executable in $logoutScriptPath/* ; do
-        echo "$executable"
-        # making sure it's an executable
-        if [[ -x "$executable" ]]; then
-          eval $executable
-        fi
-      done
+  for logoutScriptPath in $logoutAnyScriptPath $logoutHostTypeScriptPath ; do
+    for executable in $logoutScriptPath/* ; do
+      echo "$executable"
+      # making sure it's an executable
+      if [[ -x "$executable" ]]; then
+        eval $executable
+      fi
     done
   done
-fi
+done
