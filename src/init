@@ -55,8 +55,3 @@ if [ -z "$UCORE_OS_VERSION" ]; then
 else
     source $dir/env
 fi
-
-# executing the input command (if applicable)
-if ! [ -z "$1" ] ; then
-    eval "$1"
-fi
