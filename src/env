@@ -2,11 +2,10 @@
 
 # getting current script folder
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-rootDir="$(dirname $dir)"
 
 # avoiding to prepended to the system path for every single bash session by making
 # sure bin is not included to the path yet.
-ucoreBinPath+="$rootDir/bin"
+ucoreBinPath+="$dir/bin"
 if ! [ "$UCORE_BIN_PATH" == "$ucoreBinPath" ]; then
     export UCORE_BIN_PATH=$ucoreBinPath
     export PATH="$UCORE_BIN_PATH:$PATH"
