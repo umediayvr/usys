@@ -1,1 +1,4 @@
 # global git ignore
+build_release
+default
+products
