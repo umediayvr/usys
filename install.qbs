@@ -25,8 +25,6 @@ Project {
 
   Application {
     Group {
-      qbs.install: true
-      qbs.installSourceBase: "./src"
       qbs.installPrefix: {
 
         // building the target location
@@ -42,10 +40,24 @@ Project {
         return targetPrefix
       }
 
-      files: [
-        "src/**"
-      ]
-      excludeFiles: []
+      Group {
+          name: "Main source files"
+          files: [
+            "src/**"
+          ]
+          excludeFiles: []
+          qbs.installSourceBase: "./src"
+          qbs.install: true
+      }
+
+      Group {
+          name: "Info File"
+          files: [
+            "info.json"
+          ]
+          qbs.install: true
+          qbs.installSourceBase: "./"
+      }
     }
   }
 }
