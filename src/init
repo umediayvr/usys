@@ -13,23 +13,22 @@
 # |\________                       ~~~~~\
 # ||       |\___________________________/|
 #
-# ucore is responsable for initialization of the infrastructure used
-# by apps that run on top upipe
+# usys is used to provide system information
 
 # getting current script folder
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # detecting the current os
 if [ "$(uname)" == "Darwin" ]; then
-    export UCORE_OS="osx"
+    export USYS_OS="osx"
 
     # in osx ignoring the last part of product version (xx.xx.XX) is about the system update version,
     # since apps should be completly compatible accross them there is no need to include it as part of
     # the os version
-    export UCORE_OS_VERSION=`sw_vers -productVersion | grep -oE '[0-9]*.[0-9]*' | head -n 1`
+    export USYS_OS_VERSION=`sw_vers -productVersion | grep -oE '[0-9]*.[0-9]*' | head -n 1`
 
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    export UCORE_OS="linux"
+    export USYS_OS="linux"
 
     # figuring out the linux version (centos or ubuntu)
     {
@@ -42,16 +41,21 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
       osVersion=$(cat /etc/lsb-release | grep -Po '(?<=DISTRIB_RELEASE=).*')
     }
 
-    export UCORE_OS_VERSION=$osName$osVersion
+    export USYS_OS_VERSION=$osName$osVersion
 
 elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]; then
-    export UCORE_OS="windows"
+    export USYS_OS="windows"
 fi
 
 # initializing
-if [ -z "$UCORE_OS_VERSION" ]; then
-    echo "COULD NOT RESOLVE UCORE_OS_VERSION!" >&2
-
-else
-    source $dir/env
+if [ -z "$USYS_OS_VERSION" ]; then
+    echo "COULD NOT RESOLVE USYS_OS_VERSION!" >&2
 fi
+
+# tells what is the host type, for instance 'company-wk-0003' results 'wk'
+# Note: this can be overridden through a "postInit" script inside of sys-config
+export USYS_HOST_TYPE=`echo $HOSTNAME | grep -oE '[a-z]*' | head -n 2 | tail -n 1`
+
+# used to write metadata information (keep in mind the data under this folder
+# is volatile)
+export USYS_LOCAL_DATA="$HOME/.local/share/upipe"
