@@ -1,2 +1,2 @@
-# ucore
-Core infrastructure for Umedia
+# usys
+system infrastructure for upipe
